@@ -18,7 +18,8 @@ app.use((req, res, next) => {
 });
 
 //Route request
-const productRoutes = require("./api/routes/products");
+const messageRoutes = require("./routes/message");
+const botRoutes = require("./routes/bot");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -26,8 +27,11 @@ app.use(bodyParser.json());
 // Logging
 app.use(morgan("dev"));
 
-app.use("/products", productRoutes);
+//Routing
+app.use("/message", messageRoutes);
+app.use("/postUtterance", botRoutes);
 
+// Error handling
 app.use((req, res, next) => {
   const error = new Error("not found");
   error.status = 404;
@@ -42,11 +46,5 @@ app.use((error, req, res, next) => {
     },
   });
 });
-
-// app.use((req, res, next) => {
-//   res.status(200).json({
-//     message: "it works!",
-//   });
-// });
 
 module.exports = app;
