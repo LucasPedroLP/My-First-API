@@ -6,6 +6,7 @@ router.post("/", (req, res, next) => {
   //   var msgTxt = req.body.replymessages.text;
   var msgTxt = req.body.inputMessage.text;
   response.botState = "MORADATA";
+  response.intent = "none";
   response.replymessages[0].text =
     "This is a test. To Talk to an agent, please say 'Human'";
   if (data.utterance.includes(msgTxt.toUpperCase())) {
